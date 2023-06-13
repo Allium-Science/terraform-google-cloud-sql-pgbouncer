@@ -24,7 +24,7 @@ module "pgbouncer_cloud_init" {
 
 data "google_compute_image" "boot" {
   project = split("/", var.boot_image)[0]
-  family  = split("/", var.boot_image)[1]
+  name    = split("/", var.boot_image)[1]
 }
 
 resource "google_compute_instance" "pgbouncer" {
