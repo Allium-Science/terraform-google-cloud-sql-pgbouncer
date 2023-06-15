@@ -1,7 +1,8 @@
 locals {
-  users    = [for u in var.users : ({ name = u.name, password = u.password })]
-  admins   = [for u in var.users : u.name if lookup(u, "admin", false) == true]
-  userlist = templatefile("${path.module}/templates/userlist.txt.tmpl", { users = local.users })
+  users        = [for u in var.users : ({ name = u.name, password = u.password })]
+  admins       = [for u in var.users : u.name if lookup(u, "admin", false) == true]
+  stats_users  = [for u in var.users : u.name if lookup(u, "stats_user", false) == true]
+  userlist     = templatefile("${path.module}/templates/userlist.txt.tmpl", { users = local.users })
   cloud_config = templatefile(
     "${path.module}/templates/pgbouncer.ini.tmpl",
     {
@@ -15,6 +16,7 @@ locals {
       max_client_conn    = var.max_client_conn
       pool_mode          = var.pool_mode
       admin_users        = join(",", local.admins)
+      stats_users        = join(",", local.stats_users)
       custom_config      = var.custom_config
     }
   )

@@ -35,7 +35,7 @@ module "pgbouncer" {
 
 The module accepts both plain-text or pre-hashed md5 passwords as input. Plain-text passwords will be automatically hashed to md5 and their hashed values stored in Terraform's state.
 
-The `users` map accepts an optional `admin` key. When this is set to `true`, the user will be added to the list of PgBouncer admins and stats users.
+The `users` map accepts an optional `admin` key. When this is set to `true`, the user will be added to the list of PgBouncer admins. Similarly, it also accepts an optional `stats_user` key, where setting it to `true` will make the user be added to the list of PgBouncer stats users.
 
 ## Configuring PgBouncer
 
