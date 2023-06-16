@@ -28,6 +28,7 @@ variable "port" {
 variable "users" {
   description = "The list of users to be created in PgBouncer's userlist.txt. Passwords can be provided as plain-text or md5 hashes."
   type        = list
+  default     = null
 }
 
 variable "auth_user" {
